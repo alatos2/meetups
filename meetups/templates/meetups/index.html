@@ -1,28 +1,22 @@
-{% load static%}
+{% extends "meetups/base/base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Meetups</title>
-    <link rel="stylesheet" href="{% static 'meetups/styles/base.css' %}">
-</head>
-<body>
-    <h1>All Meetups</h1>
-    <p>hello world!</p>
-    <!-- {% if show_meetups %}
-        <h3>{{ meetups.0.title }}</h3>
-    {% else %}
-        <h3>No meetups found ...</h3>
-    {% endif %} -->
-    {% if show_meetups %}
-        {% for meetup in meetups %}
-            <h3>{{ meetup.title }}</h3>
-        {% endfor %}
-    {% else %}
-        <h3>No meetups found ...</h3>
-    {% endif %}
-</body>
-</html>
+{% load static %}
+
+{% block title %}All Meetups{% endblock %}
+
+{% block site_css %}<link rel="stylesheet" href="{% static 'meetups/styles/all-meetups.css' %}">{% endblock %}
+
+{% block main_heading %}We got great meetups coming!{% endblock %}
+
+{% block header_content %}<p>Find one that best suit your needs</p>{% endblock %}
+
+{% block body %}
+    <section>
+        <h2>Upcoming Meetups</h2>
+        <ol>
+            {% for meetup_item in meetups %}
+                {% include 'meetups/includes/meetup-item.html' %}
+            {% endfor %}
+        </ol>
+    </section>
+{% endblock %}
